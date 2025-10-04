@@ -19,8 +19,10 @@ typedef struct    s_list
     void          *data;
 }                 t_list; */
 
-#ifndef LIST_H
-# define LIST_H
+#ifndef FT_LIST_H
+# define FT_LIST_H
+
+#include <stdlib.h>
 typedef struct    s_list
 {
     struct s_list *next;

@@ -17,76 +17,54 @@ string.
 
 Your function must be declared as follows:
 
-int	ft_atoi_base(const char *str, int str_base);
- */
-
+int	ft_atoi_base(const char *str, int str_base); */
 #include <stdio.h>
 
-static int	ft_isdigit(char c, int base)
-{
-	if (c >= '0' && c <= '9')
-		return (c - '0');
-	if (c >= 'a' && c <= 'f')
-		return (c - 'a' + 10);
-	if (c >= 'A' && c <= 'F')
-		return (c - 'A' + 10);
-	return (-1);
-}
-
-int	ft_atoi_base(const char *str, int str_base)
+int ft_atoi_base(const char *str, int str_base)
 {
 	int result = 0;
 	int sign = 1;
-	int value;
- 
-    // check if the base is valid
-	if (!str || str_base < 2 || str_base > 16)
-		return (0);
-    // skip spaces
-	while (*str == ' ' || (*str >= 9 && *str <= 13))
-		str++;
-    // check for the sign
-	if (*str == '-')
+	int i = 0;
+
+	if (str[0] == '-')
 	{
 		sign = -1;
-		str++;
+		i++;
 	}
-    // check if the char exists in the base
-	while ((value = ft_isdigit(*str, str_base)) >= 0 && value < str_base)
+	if (str_base < 2 || str_base > 16)
+		return 0;
+
+	while (str[i] != '\0')
 	{
-        // if so, add the value to the result
-		result = result * str_base + value;
-		str++;
+		char c = str[i];
+		int digit;
+
+		if (c >= '0' && c <= '9')
+			digit = c - '0';
+		else if (c >= 'a' && c <= 'f')
+			digit = c - 'a' + 10;
+		else if (c >= 'A' && c <= 'F')
+			digit = c - 'A' + 10;
+		else
+			return 0;
+		if (digit >= str_base)
+			return  0;
+		result = result * str_base + digit;
+		i++;
 	}
-	// if there is a weird char we skip it
-	while (*str == ' ' || (*str >= 9 && *str <= 13) || *str == '!')
-		str++;
-	return (result * sign);
+	return (sign * result);
 }
-/* --------------------------------------------------------- */
 
-// #include <stdlib.h>
-// #include <stdio.h>
-// int main(int argc, char **argv)
-// {
-// 	printf("atoi base: %d", ft_atoi_base(argv[1], atoi(argv[2])));
-// 	return 0;
-// }
-
-// ----------------8<-------------[ START TEST 
-//         💻 TEST
-// ./a.out "13268!" "16"         
-//  YOUR OUTPUT:
-// 0$
-//         🗝 EXPECTED OUTPUT:
-// 78440$
-// ----------------8<------------- END TEST ]
-
-// ----------------8<-------------[ START TEST 
-//         💻 TEST
-// ./a.out "13268!" "16"         
-// YOUR OUTPUT:
-// 0$
-//         🗝 EXPECTED OUTPUT:
-// 78440$
-// ----------------8<------------- END TEST ]
+int	main(void)
+{
+	printf("Base 2,  num 101----->  %d\n", ft_atoi_base("1011", 2));
+	printf("Base 2,  num -101---->  %d\n", ft_atoi_base("-1011", 2));
+	printf("Base 8,  num 17------>  %d\n", ft_atoi_base("17", 8));
+	printf("Base 8,  num 128----->  %d\n", ft_atoi_base("128", 8));
+	printf("Base 16, num 7F------>  %d\n", ft_atoi_base("7F", 16));
+	printf("Base 16, num 7f------>  %d\n", ft_atoi_base("7f", 16));
+	printf("Base 10, num A------->  %d\n", ft_atoi_base("A", 10));
+	printf("Base 17, num 101----->  %d\n", ft_atoi_base("101", 17));
+	printf("Base 1,  num 101----->  %d\n", ft_atoi_base("101", 1));
+	return (0);
+}
