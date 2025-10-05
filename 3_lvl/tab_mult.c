@@ -36,3 +36,70 @@ $>
 $>./tab_mult | cat -e
 $
 $> */
+
+#include <unistd.h>
+#include <stdio.h>
+int	ft_atoi(char *str)
+{
+	int i = 0;
+	int res = 0;
+	if (str[i] == '-' || str[i] == '+')
+	{
+		if (str[i] == '-')
+			return 0;
+		i++;
+	}
+	while(str[i])
+	{
+		res = res * 10 + (str[i] - '0');
+		i++;
+	}
+	return (res);
+}
+
+void	ft_putnbr(int num)
+{
+	char digit;
+	if (num >= 10)
+		ft_putnbr(num /10);
+	digit = num % 10 + '0';
+	write(1, &digit, 1);
+}
+
+int	main(int argc, char **argv)
+{
+	if (argc == 2)
+	{
+		int i = 0;
+		while (argv[1][i] != '\0')
+			i++;
+		int num = ft_atoi(argv[1]);
+		int res = 1;
+		int total = 0;
+		if (num > 214483647)
+				return 1;
+		while(res <= 9)
+		{
+			ft_putnbr(res);
+			write(1, " x ", 3);
+			ft_putnbr(num);
+			write(1, " = ", 3);
+			total = num * res;
+			if (total > 214483647)
+				return 1;
+			ft_putnbr(total);
+			write(1, "\n", 1);
+			res++;
+		}
+	}
+	else 
+		write(1, "\n", 1);
+	return 0;
+}
+
+// int 
+// {
+// 	int i = 0;
+// 	printf ("%d", ft_atoi(argv[1]));
+// 	return 0;
+// }

@@ -17,3 +17,23 @@ $>./paramsum 6 12 24 | cat -e
 $>./paramsum | cat -e
 0$
 $> */
+
+#include <unistd.h>
+
+void	putnbr(int num)
+{
+	char digit = 0;
+	if (num > 9)
+		putnbr(num / 10);
+	digit = num % 10 + '0';
+	write(1, &digit, 1);
+}
+
+int main(int argc, char **argv)
+{
+	(void **)argv;
+
+	putnbr(argc - 1);
+	write(1, "\n", 1);
+	return (0);
+}
