@@ -57,8 +57,8 @@ int ft_atoi_base(const char *str, int str_base)
 
 int	main(void)
 {
-	printf("Base 2,  num 101----->  %d\n", ft_atoi_base("1011", 2));
-	printf("Base 2,  num -101---->  %d\n", ft_atoi_base("-1011", 2));
+	printf("Base 2,  num 101----->  %d\n", ft_atoi_base("101", 2));
+	printf("Base 2,  num -101---->  %d\n", ft_atoi_base("-101", 2));
 	printf("Base 8,  num 17------>  %d\n", ft_atoi_base("17", 8));
 	printf("Base 8,  num 128----->  %d\n", ft_atoi_base("128", 8));
 	printf("Base 16, num 7F------>  %d\n", ft_atoi_base("7F", 16));

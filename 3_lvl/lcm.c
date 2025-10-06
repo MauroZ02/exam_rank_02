@@ -26,3 +26,31 @@ If at least one integer is null, LCM is equal to 0.
 Your function must be prototyped as follows:
 
   unsigned int    lcm(unsigned int a, unsigned int b); */
+
+#include <stdio.h>
+#include <stdlib.h>
+unsigned int lcm(unsigned int a, unsigned int b)
+{
+	unsigned int n;
+
+	if (a == 0 || b == 0)
+		return (0);
+	if (a > b)
+		n = a;
+	else
+		n = b;
+	while (1)
+	{
+		if (n % a == 0 && n % b == 0)
+			return (n);
+		++n;
+	}
+}
+
+int main(int argc, char **argv)
+{
+  int a = atoi(argv[1]);
+  int b = atoi(argv[2]);
+  printf("el minimo comun multiplo de %d y %d es: %d",a, b, lcm(a, b));
+  return(0);
+}

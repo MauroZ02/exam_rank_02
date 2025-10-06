@@ -11,3 +11,26 @@ Your function must be declared as follows:
 void	print_bits(unsigned char octet);
 
 Example, if you pass 2 to print_bits, it will print "00000010" */
+
+#include <unistd.h>
+#include <stdlib.h>
+
+void	print_bits(unsigned char octet)
+{
+	int i = 8;
+	char bit;
+	while (i > 0)
+	{
+		i--;
+		bit = (octet >> i & 1) + '0';
+		write(1, &bit, 1);
+	}
+}
+
+
+int main(int argc, char **argv)
+{
+	unsigned char octet = atoi(argv[1]);
+	print_bits(octet);
+	return 0;
+}

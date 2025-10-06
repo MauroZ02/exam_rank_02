@@ -27,33 +27,6 @@ $> */
 
 #include <unistd.h>
 
-// int	main(int argc, char *argv[])
-// {
-// 	if (argc == 2)
-// 	{
-// 		char *str = argv[1];
-// 		int i = 0;
-// 		int space = 0;
-// 		while (str[i] == ' ' || str[i] == '\t')
-// 			i++;
-// 		while (str[i])
-// 		{
-// 			if (str[i] == ' ' || str[i] == '\t')
-// 				space = 1;
-// 			else
-// 			{
-// 				if (space == 1)
-// 					write(1, " ", 1);
-// 				write(1, &str[i], 1);
-// 				space = 0;
-// 			}
-// 			i++;
-// 		}
-// 	}
-// 	write(1, "\n", 1);
-// 	return (0);
-// }
-
 int	main(int argc, char **argv)
 {
 	if (argc == 2)
@@ -61,7 +34,7 @@ int	main(int argc, char **argv)
 		char *str = argv[1];
 		int i = 0;
 		int space = 0;
-		while (str[i] == ' ' || str[i] == '	' /*&& str[i] != '\0'*/)
+		while (str[i] == ' ' || str[i] == '	' && str[i] != '\0')
 			i++;
 		while(str[i])
 		{
