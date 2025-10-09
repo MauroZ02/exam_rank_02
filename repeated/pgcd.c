@@ -23,35 +23,3 @@ $> ./pgcd 17 3 | cat -e
 1$
 $> ./pgcd | cat -e
 $ */
-
-#include <stdio.h>
-#include <stdlib.h>
-
-int main(int argc, char **argv)
-{
-	if (argc == 3)
-	{
-		int n1 = atoi(argv[1]);
-		int n2 = atoi(argv[2]);
-		int min = 0;
-
-		if (n1 >= 1 && n2 >= 1)
-		{
-			if (n1 > n2)
-				min = n2;
-			else 
-				min = n1;
-			while (min > 0)
-			{
-				if (n1 % min == 0 && n2 % min == 0)
-				{
-					printf("%d", min);
-					break;
-				}
-				min--;
-			}
-		}
-	}
-	printf("\n");
-	return (0);
-}

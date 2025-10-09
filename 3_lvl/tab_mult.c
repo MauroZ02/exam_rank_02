@@ -96,10 +96,3 @@ int	main(int argc, char **argv)
 		write(1, "\n", 1);
 	return 0;
 }
-
-// int 
-// {
-// 	int i = 0;
-// 	printf ("%d", ft_atoi(argv[1]));
-// 	return 0;
-// }

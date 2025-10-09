@@ -27,7 +27,6 @@ void	print_bits(unsigned char octet)
 	}
 }
 
-
 int main(int argc, char **argv)
 {
 	unsigned char octet = atoi(argv[1]);

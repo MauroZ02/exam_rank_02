@@ -25,3 +25,57 @@ seconD tesT A littlE biT   moaR compleX$
    but... thiS iS noT thaT compleX$
      okay, thiS iS thE lasT 1239809147801 buT noT    thE leasT    T$
 $> */
+
+#include <unistd.h>
+#include <stdio.h>
+
+void  to_low(char *c)
+{
+  int i = 0;
+  while(c[i])
+  {
+    if (c[i] >= 'A' && c[i] <= 'Z')
+      c[i] = c[i] + 32;
+      i++;
+  }
+}
+
+int is_space(char c)
+{
+  if (c == ' ' || c == '\t')
+    return (1);
+  return (0);
+}
+
+int main(int argc, char **argv)
+{
+  if (argc < 2)
+  {
+    write(1, "\n", 1);
+    return (1);
+  }
+  if (argc >= 2)
+  {
+    int i = 1;
+    while (i < argc)
+    {
+      char *str = argv[i];
+      char j = 0;
+      int space = 1;
+      to_low(str);
+      while(str[j])
+      {
+        if (((str[j] >= 'a' && str[j] <= 'z') && is_space(str[j + 1]) == 1) || str[j + 1] == '\0')
+        {
+          str[j] = str[j] - 32;
+        }
+        write(1, &str[j], 1);
+        space = is_space(str[j]);
+        j++;
+      }
+      write(1, "\n", 1);
+      i++;
+    }
+  }
+  return (0);
+}

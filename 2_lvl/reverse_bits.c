@@ -46,15 +46,3 @@ int main(int argc, char **argv)
     printf("%u -> %u\n", x, r);
     return 0;
 }
-
-// int	main(void)
-// {
-// 	unsigned char	resultado;
-// 	unsigned char	octet;
-
-// 	octet = 00100;
-// 	resultado = reverse_bits(octet);
-// 	printf("Octeto original: 0x%X\n", octet);
-// 	printf("Octeto con bits intercambiados: 0x%X\n", resultado);
-// 	return (0);
-// }

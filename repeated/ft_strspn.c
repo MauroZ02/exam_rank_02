@@ -14,6 +14,12 @@ size_t	ft_strspn(const char *s, const char *accept); */
 #include <stdio.h>
 
 
+
+
+
+
+
+
 int main(int argc, char **argv)
 {
 	if (argc == 3)
