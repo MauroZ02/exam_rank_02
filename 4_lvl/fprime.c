@@ -31,3 +31,43 @@ $> ./fprime | cat -e
 $
 $> ./fprime 42 21 | cat -e
 $ */
+
+#include <stdio.h>
+#include <stdlib.h>
+
+int	is_prime(int n)
+{
+	int i = 2;
+
+	while (i * i <= n)
+	{
+		if (n % i == 0)
+			return 0;
+		i++;
+	}
+	return 1;
+}
+
+int	main(int argc, char **argv)
+{
+	if (argc == 2)
+	{
+		int num = atoi(argv[1]);
+		if (num < 0)
+		{
+			printf("\n");
+			return (1);
+		}
+
+		int res = 0;
+		while (num > 0)
+		{
+			if (is_prime(num))
+				res++;
+			printf("%d*", res);
+			num--;
+		}
+	}
+	printf("\n");
+	return (0);
+}
