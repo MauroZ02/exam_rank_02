@@ -27,10 +27,33 @@ The t_point structure is prototyped like this:
 
 Example:
 
-$> cat test.c
+$> cat test.c */
+
+/*
+$> gcc flood_fill.c test.c -o test; ./test
+11111111
+10001001
+10010001
+10110001
+11100001
+
+FFFFFFFF
+F000F00F
+F00F000F
+F0FF000F
+FFF0000F
+$> */
+
+#include "flood_fill.h"
 #include <stdlib.h>
 #include <stdio.h>
-#include "flood_fill.h"
+//#include "flood_fill.h"
+
+// typedef struct  s_point
+// {
+//   int           x;
+//   int           y;
+// }               t_point;
 
 char** make_area(char** zone, t_point size)
 {
@@ -48,15 +71,32 @@ char** make_area(char** zone, t_point size)
 	return new;
 }
 
+void	fill(char **tab, t_point size, t_point curr, char to_fill)
+{
+	if (curr.x < 0 || curr.x >= size.x || curr.y < 0 || curr.y >= size.y ||
+			tab[curr.y][curr.x] != to_fill)
+			return ;
+	tab[curr.y][curr.x] = 'F';
+	fill(tab, size, (t_point){curr.x + 1, curr.y}, to_fill);
+	fill(tab, size, (t_point){curr.x - 1, curr.y}, to_fill);
+	fill(tab, size, (t_point){curr.x, curr.y + 1}, to_fill);
+	fill(tab, size, (t_point){curr.x, curr.y - 1}, to_fill);
+}
+
+void  flood_fill(char **tab, t_point size, t_point begin)
+{
+	fill(tab, size, begin, tab[begin.y][begin.x]);
+}
+
 int main(void)
 {
-	t_point size = {8, 5};
+	t_point size = {11, 5};
 	char *zone[] = {
-		"11111111",
-		"10001001",
-		"10010001",
-		"10110001",
-		"11100001",
+		"11111111111",
+		"10000000001",
+		"10010000001",
+		"10011111111",
+		"11100000001",
 	};
 
 	char**  area = make_area(zone, size);
@@ -70,51 +110,3 @@ int main(void)
 		printf("%s\n", area[i]);
 	return (0);
 }
-
-$> gcc flood_fill.c test.c -o test; ./test
-11111111
-10001001
-10010001
-10110001
-11100001
-
-FFFFFFFF
-F000F00F
-F00F000F
-F0FF000F
-FFF0000F
-$> */
-
-#include "flood_fill.h"
-
-void	fill(char **tab, t_point size, t_point curr, char to_fill)
-{
-
-	if (curr.x < 0 || curr.x >= size.x || curr.y < 0 || curr.y >= size.y || tab[curr.y][curr.x] != to_fill)
-		return ;
-	tab[curr.y][curr.x] = 'F';
-	fill(tab, size, (t_point){curr.x + 1, curr.y}, to_fill);
-	fill(tab, size, (t_point){curr.x - 1, curr.y}, to_fill);
-	fill(tab, size, (t_point){curr.x, curr.y + 1}, to_fill);
-	fill(tab, size, (t_point){curr.x, curr.y - 1}, to_fill);
-}
-void	flood_fill(char **tab, t_point size, t_point begin)
-{
-	fill(tab, size, begin, tab[begin.y][begin.x]);
-}
-
-// void	fill(char **tab, t_point size, t_point cur, char to_fill)
-// {
-// 	if (cur.y < 0 || cur.y >= size.y || cur.x < 0 || cur.x >= size.x || tab[cur.y][cur.x] != to_fill)
-// 		return;
-// 	tab[cur.y][cur.x] = 'F';
-// 	fill(tab, size, (t_point){cur.x - 1, cur.y}, to_fill);
-// 	fill(tab, size, (t_point){cur.x + 1, cur.y}, to_fill);
-// 	fill(tab, size, (t_point){cur.x, cur.y - 1}, to_fill);
-// 	fill(tab, size, (t_point){cur.x, cur.y + 1}, to_fill);
-// }
-
-// void	flood_fill(char **tab, t_point size, t_point begin)
-// {
-// 	fill(tab, size, begin, tab[begin.y][begin.x]);
-// }

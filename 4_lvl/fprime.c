@@ -39,7 +39,7 @@ int	is_prime(int n)
 {
 	int i = 2;
 
-	while (i * i <= n)
+	while (i <= n / i)
 	{
 		if (n % i == 0)
 			return 0;
@@ -58,14 +58,24 @@ int	main(int argc, char **argv)
 			printf("\n");
 			return (1);
 		}
-
-		int res = 0;
-		while (num > 0)
+		if (num == 1)
+			printf("%d", num);
+		int prime = 2;
+		while (num > 1)
 		{
-			if (is_prime(num))
-				res++;
-			printf("%d*", res);
-			num--;
+			if (is_prime(prime) == 1)
+			{
+				while (num % prime == 0)
+				{
+					if (num / prime == 1)
+						printf("%d", prime);
+					else
+						printf("%d*", prime);
+					num = num / prime;
+				}
+
+			}
+			prime++;
 		}
 	}
 	printf("\n");

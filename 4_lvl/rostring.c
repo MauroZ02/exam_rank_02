@@ -32,3 +32,66 @@ $>
 $>./rostring | cat -e
 $
 $> */
+
+#include <unistd.h>
+
+#include <unistd.h>
+
+int	is_space(char c)
+{
+	if (c == ' ' || c == '\t')
+		return (1);
+	return (0);
+}
+
+int	main(int argc, char **argv)
+{
+	if (argc > 1 && argv[1][0])
+	{
+		char	*str;
+		int		i;
+		int		start;
+		int		end;
+		int		printed;
+
+		str = argv[1];
+		i = 0;
+		while (str[i] && is_space(str[i]))
+			i++;
+		start = i;
+		while (str[i] && !is_space(str[i]))
+			i++;
+		end = i;
+		if (start == end)
+		{
+			write(1, "\n", 1);
+			return (0);
+		}
+		printed = 0;
+		while (str[i])
+		{
+			while (str[i] && is_space(str[i]))
+				i++;
+			if (!str[i])
+				break ;
+			if (printed)
+				write(1, " ", 1);
+			while (str[i] && !is_space(str[i]))
+			{
+				write(1, &str[i], 1);
+				i++;
+			}
+			printed = 1;
+		}
+		if (printed)
+			write(1, " ", 1);
+		while (start < end)
+		{
+			write(1, &str[start], 1);
+			start++;
+		}
+	}
+	write(1, "\n", 1);
+	return (0);
+}
+
