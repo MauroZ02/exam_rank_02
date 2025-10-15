@@ -74,7 +74,7 @@ int	main(int argc, char **argv)
 				i++;
 			if (!str[i])
 				break ;
-			if (printed)
+			if (printed == 1)
 				write(1, " ", 1);
 			while (str[i] && !is_space(str[i]))
 			{
@@ -83,7 +83,7 @@ int	main(int argc, char **argv)
 			}
 			printed = 1;
 		}
-		if (printed)
+		if (printed == 1)
 			write(1, " ", 1);
 		while (start < end)
 		{
