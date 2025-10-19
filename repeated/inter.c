@@ -24,6 +24,63 @@ $ */
 
 #include <unistd.h>
 
+int is_repeated
+
+int main(int argc, char** argv)
+{
+	if (argc == 3)
+	{
+		int i = 0;
+		int j = 0;
+		char *s1 = argv[1];
+		char *s2 = argv[2];
+		while (s1[i])
+		{
+			while (s2[j])
+			{
+				if (s1[i] = s2[j])
+				{
+
+				}
+				j++;
+			}
+			i++;
+		}
+	}
+	write(1, "\n", 1);
+	return (0);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#include <unistd.h>
+
 int	is_repeated(char s2, char *s1, int n)
 {
 	int i = 0;
