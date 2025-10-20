@@ -13,6 +13,45 @@ Your function must be declared as follows:
 
 char    **ft_split(char *str); */
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 #include <stdlib.h>
 #include <stdio.h>
 

@@ -21,74 +21,83 @@ typedef struct      s_list
     void            *data;
 }                   t_list;
 $> */
-
-#include "ft_list.h"
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
+typedef struct      s_list
+{
+    struct s_list   *next;
+    void            *data;
+}                   t_list;
+
 
 void    ft_list_remove_if(t_list **begin_list, void *data_ref, int (*cmp)())
 {
-    if (begin_list == NULL || *begin_list == NULL)
-        return;
+	if (begin_list == NULL || *begin_list == NULL)
+		return ;
 
-    t_list *cur;
-    t_list *remove;
-    cur = *begin_list;
-
-        if ((cmp)(cur->data, data_ref) == 0)
-        {
-            *begin_list = cur->next;
-            free(cur);
-            ft_list_remove_if(begin_list, data_ref, cmp);
-        }
-        else 
-        {
-            cur = *begin_list;
-            ft_list_remove_if(&cur->next, data_ref, cmp);
-        }
-}
-
-void	print_list(t_list **begin_list)
-{
 	t_list *cur = *begin_list;
-	while (cur != 0)
+
+	if (cmp(cur->data, data_ref) == 0)
 	{
-		printf("%s\n", cur->data);
-		cur = cur->next;
+		*begin_list = cur->next;
+		free(cur);
+		ft_list_remove_if(begin_list, data_ref, cmp);
+	}
+	else
+	{
+		ft_list_remove_if(&cur->next, data_ref, cmp);
 	}
 }
 
-int		main(void)
+int	compare(void *a, void *b)
 {
-	char straa[] = "String aa";
-	t_list *aa = malloc(sizeof(t_list));
-	aa->next = 0;
-	aa->data = straa;
+	if (a == b)
+		return 0;
+	else
+		return 1;
+}
 
-	char strbb[] = "String bb";
-	t_list *bb = malloc(sizeof(t_list));
-	bb->next = 0;
-	bb->data = strbb;
+int	main(void)
+{
+	t_list *head;
+	t_list *cur;
 
-	char strcc[] = "String cc";
-	t_list *cc = malloc(sizeof(t_list));
-	cc->next = 0;
-	cc->data = strcc;
+	head = malloc(sizeof(t_list));
+	head->data = (void *)3;
+	head->next = malloc(sizeof(t_list));
 
-	char strdd[] = "String dd";
-	t_list *dd = malloc(sizeof(t_list));
-	dd->next = 0;
-	dd->data = strdd;
+	head->next->data = (void *)5;
+	head->next->next = malloc(sizeof(t_list));
 
-	aa->next = bb;
-	bb->next = cc;
-	cc->next = dd;
+	head->next->next->data = (void *)5;
+	head->next->next->next = malloc(sizeof(t_list));
 
-	t_list **begin_list = &aa;
+	head->next->next->next->data = (void *)3;
+	head->next->next->next->next = malloc(sizeof(t_list));
 
-	print_list(begin_list);
-	printf("----------\n");
-	ft_list_remove_if(begin_list, strbb, strcmp);
-	print_list(begin_list);
+	head->next->next->next->next->data = (void *)3;
+	head->next->next->next->next->next = malloc(sizeof(t_list));
+
+	head->next->next->next->next->next->data = (void *)5;
+	head->next->next->next->next->next->next = NULL;
+
+	printf("Lista completa:\n");
+	cur = head;
+	while (cur)
+	{
+		printf("%d ", (int)(long)cur->data);
+		cur = cur->next;
+	}
+	printf("\n");
+
+	ft_list_remove_if(&head, (void*)5, compare);
+
+	printf("Lista después:\n");
+	cur = head;
+	while (cur)
+	{
+		printf("%d ", (int)(long)cur->data);
+		cur = cur->next;
+	}
+	printf("\n");
 }

@@ -23,25 +23,38 @@ typedef struct    s_list
     void          *data;
 }                 t_list; */
 
-#include "ft_list.h"
-
-void    ft_list_foreach(t_list *begin_list, void (*f)(void *))
+// #include "ft_list.h"
+#include <stdio.h>
+typedef struct    s_list
 {
-    t_list *point;
-    point = begin_list;
-    while (point)
+    struct s_list *next;
+    void          *data;
+}                 t_list; 
+
+void    ft_list_foreach(t_list *begin, void (*f)(void *))
+{
+    while (begin)
     {
-        (*f)(point->data);
-        point = point->next;
+        (*f)(begin->data);
+        begin = begin->next;
     }
 }
 
+
+// void    ft_list_foreach(t_list *begin_list, void (*f)(void *))
+// {
+//     t_list *point;
+//     point = begin_list;
+//     while (point)
+//     {
+//         (*f)(point->data);
+//         point = point->next;
+//     }
+// }
+
 /* main.c: pruebas para ft_list_foreach */
 #include <unistd.h>
-#include "ft_list.h"
-
-/* prototipo de tu función a testear */
-void    ft_list_foreach(t_list *begin_list, void (*f)(void *));
+//#include "ft_list.h"
 
 /* imprime s y salto de línea con write */
 void    putstr_line(char *s)

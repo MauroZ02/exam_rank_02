@@ -35,8 +35,6 @@ $> */
 
 #include <unistd.h>
 
-#include <unistd.h>
-
 int	is_space(char c)
 {
 	if (c == ' ' || c == '\t')
@@ -94,4 +92,3 @@ int	main(int argc, char **argv)
 	write(1, "\n", 1);
 	return (0);
 }
-

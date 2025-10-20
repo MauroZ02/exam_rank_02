@@ -3,147 +3,233 @@ Expected files   : sort_list.c
 Allowed functions:
 --------------------------------------------------------------------------------
 
-Write the following functions:
 
-t_list	*sort_list(t_list* lst, int (*cmp)(int, int));
+Escriba la siguiente función:
 
-This function must sort the list given as a parameter, using the function
-pointer cmp to select the order to apply, and returns a pointer to the
-first element of the sorted list.
 
-Duplications must remain.
+t_list  *sort_list(t_list* lst, int (*cmp)(int, int));
 
-Inputs will always be consistent.
 
-You must use the type t_list described in the file list.h
-that is provided to you. You must include that file
-(#include "list.h"), but you must not turn it in. We will use our own
-to compile your assignment.
+esta función tendrá que ordenar la lista pasada como parámetro, utlilizando el 
+puntero a función cmp para determinar el orden que hay que aplicar y devolver 
+un puntero al primer elemento de la lista ordenada.
 
-Functions passed as cmp will always return a value different from
-0 if a and b are in the right order, 0 otherwise.
+Se deben conservar los duplicados.
 
-For example, the following function used as cmp will sort the list
-in ascending order:
+Las entradas siempre serásn coherentes.
+
+Debe utilizar el tipo t_list desccrito en el archivo list.h que se le 
+hafacilitado. Tendrá que incluir este archivo (#include "list.h"), pero no 
+entregarlo. Utilizaremos el nuestro propio para compilar su ejecución.
+
+Si a y b se encuentran en el orden correct, las funciones pasadas como cmp 
+devolverán siempre un valor distinto de 0.  
+
+Por ejemplo, la siguiente función utilizada como cmp tendrá que permitir 
+ordenar la lista por orden creciente: 
 
 int ascending(int a, int b)
 {
-	return (a <= b);
+    return (a <= b);
 } */
 
-// typedef struct    s_list
-// {
-//     struct s_list *next;
-//     void          *data;
-// }                 t_list;
+typedef struct    s_list
+{
+    struct s_list *next;
+    int          data;
+}                 t_list;
 
-#include "ft_list.h"
-
+#include <stdio.h>
 t_list	*sort_list(t_list* lst, int (*cmp)(int, int))
 {
-	t_list	*start;
-	int swap = 0;
+    t_list *start;
+    int tmp = 0;
 
-	start = lst;
-	while (lst && lst->next)
-	{
-		if ((*cmp)(lst->data, lst->next->data) == 0)
-		{
-			swap = lst->data;
-			lst->data = lst->next->data;
-			lst->next->data = swap;
-			lst = start;
-		}
-		else 
-			lst = lst->next;
-	}
-	return (start);
-}
-
-#include <unistd.h>
-
-/* prototipo de la función a probar */
-t_list  *sort_list(t_list *lst, int (*cmp)(int, int));
-
-/* comparador ascendente: devuelve != 0 si a y b están en orden */
-int     ascending(int a, int b)
-{
-    if (a <= b)
-        return (1);
-    return (0);
-}
-
-void    putnbr_rec(long nb)
-{
-    char d;
-
-    if (nb >= 10)
-        putnbr_rec(nb / 10);
-    d = '0' + (nb % 10);
-    write(1, &d, 1);
-}
-
-void    putnbr(int n)
-{
-    long nb;
-
-    nb = n;
-    if (nb < 0)
+    start = lst;
+    while (lst && lst->next)
     {
-        write(1, "-", 1);
-        nb = -nb;
+        if ((*cmp)(lst->data, lst->next->data) == 0)
+        {
+            tmp = lst->data;
+            lst->data = lst->next->data;
+            lst->next->data = tmp;
+            lst = start;
+        }
+        else
+            lst = lst->next;
     }
-    putnbr_rec(nb);
+    return (start);
+}
+int ascending(int a, int b)
+{
+	return (a <= b);
 }
 
 void    print_list(t_list *lst)
 {
     while (lst)
     {
-        putnbr(lst->data);
+        printf("%d", lst->data);
         if (lst->next)
-            write(1, " ", 1);
+            printf(" ");
         lst = lst->next;
     }
-    write(1, "\n", 1);
+    printf("\n");
 }
 
-int     main(void)
+int main(void)
 {
-    t_list  a;
-    t_list  b;
-    t_list  c;
-    t_list  d;
-    t_list  *head;
-    int     v1;
-    int     v2;
-    int     v3;
-    int     v4;
+    t_list *head;
+    t_list a;
+    t_list b;
+    t_list c;
+    t_list d;
+    t_list e;
+    t_list f;
+    t_list g;
+    t_list h;
 
-    v1 = 67;
-    v2 = 1;
-    v3 = 42;
-    v4 = 2;
-
-    a.data = v1;
-    a.next = &b;
-    b.data = v2;
-    b.next = &c;
-    c.data = v3;
-    c.next = &d;
-    d.data = v4;
-    d.next = 0;
 
     head = &a;
+    a.data = 0;
+    a.next = &b;
+    b.data = 1;
+    b.next = &c;
+    c.data = 3;
+    c.next = &d;
+    d.data = 5;
+    d.next = &e;
+    e.data = -124;
+    e.next = &f;
+    f.data = 800;
+    f.next = &g;
+    g.data = 223;
+    g.next = &h;
+    h.data = 10;
+    h.next = NULL;
 
-    /* antes */
+    printf("Lista antes de ordenar: ");
     print_list(head);
 
-    /* ordenar ascendente */
     head = sort_list(head, ascending);
 
-    /* después */
+    printf("Lista después de ordenar: ");
     print_list(head);
-
     return (0);
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// #include "ft_list.h"
+
+// t_list	*sort_list(t_list* lst, int (*cmp)(int, int))
+// {
+// 	t_list	*start;
+// 	int swap = 0;
+
+// 	start = lst;
+// 	while (lst && lst->next)
+// 	{
+// 		if ((*cmp)(lst->data, lst->next->data) == 0)
+// 		{
+// 			swap = lst->data;
+// 			lst->data = lst->next->data;
+// 			lst->next->data = swap;
+// 			lst = start;
+// 		}
+// 		else 
+// 			lst = lst->next;
+// 	}
+// 	return (start);
+// }
+
+// #include <unistd.h>
+
+// /* prototipo de la función a probar */
+// t_list  *sort_list(t_list *lst, int (*cmp)(int, int));
+
+// /* comparador ascendente: devuelve != 0 si a y b están en orden */
+// int     ascending(int a, int b)
+// {
+//     if (a <= b)
+//         return (1);
+//     return (0);
+// }
+
+// int     main(void)
+// {
+//     t_list  a;
+//     t_list  b;
+//     t_list  c;
+//     t_list  d;
+//     t_list  *head;
+//     int     v1;
+//     int     v2;
+//     int     v3;
+//     int     v4;
+
+//     v1 = 67;
+//     v2 = 1;
+//     v3 = 42;
+//     v4 = 2;
+
+//     a.data = v1;
+//     a.next = &b;
+//     b.data = v2;
+//     b.next = &c;
+//     c.data = v3;
+//     c.next = &d;
+//     d.data = v4;
+//     d.next = 0;
+
+//     head = &a;
+
+//     /* antes */
+//     print_list(head);
+
+//     /* ordenar ascendente */
+//     head = sort_list(head, ascending);
+
+//     /* después */
+//     print_list(head);
+
+//     return (0);
+// }
